@@ -123,7 +123,7 @@ export default function Footer() {
 
         <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="font-body text-sm text-text-muted">
-            © 2025 SemanticZap · Feito no Brasil 🇧🇷
+            SemanticZap é um produto de VM Consultoria — CNPJ: 52.243.638/0001-57
           </p>
           <p className="font-body text-xs text-text-muted/60">
             Todos os direitos reservados
