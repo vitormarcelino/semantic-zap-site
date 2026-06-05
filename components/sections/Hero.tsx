@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
 import GradientText from "@/components/ui/GradientText";
+import { pushEvent } from "@/lib/gtm";
 
 /* ─── Particle Field ─────────────────────────────────────────────── */
 
@@ -242,7 +243,7 @@ export default function Hero() {
             <GradientText>24 horas</GradientText>
             {" "}por dia.{" "}
             <br className="hidden sm:block" />
-            Você descansa.
+            Você escala o seu negócio.
           </motion.h1>
 
           <motion.p
@@ -253,13 +254,18 @@ export default function Hero() {
           </motion.p>
 
           <motion.div {...fadeUp(0.3)} className="flex flex-col sm:flex-row gap-4">
-            <Button variant="primary" size="lg">
+            <Button
+              variant="primary"
+              size="lg"
+              onClick={() => pushEvent("cta_click", { button_text: "Garantir acesso antecipado", button_location: "hero" })}
+            >
               Garantir acesso antecipado →
             </Button>
             <Button
               variant="ghost"
               size="lg"
               onClick={() => {
+                pushEvent("cta_click", { button_text: "Ver como funciona", button_location: "hero" });
                 document
                   .querySelector("#como-funciona")
                   ?.scrollIntoView({ behavior: "smooth" });

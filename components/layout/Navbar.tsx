@@ -2,7 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 import Button from "@/components/ui/Button";
+import { pushEvent } from "@/lib/gtm";
+
+const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://app.semanticzap.ia.br";
 
 const navLinks = [
   { label: "Como funciona", href: "#como-funciona" },
@@ -37,13 +41,14 @@ export default function Navbar() {
       >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* Logo */}
-          <a
-            href="#"
-            className="font-headline font-bold text-xl tracking-tight"
-            aria-label="SemanticZap — página inicial"
-          >
-            <span className="text-white">Semantic</span>
-            <span className="gradient-text">Zap</span>
+          <a href="#" aria-label="SemanticZap — página inicial">
+            <Image
+              src="/semanticzap-dark.svg"
+              alt="SemanticZap"
+              width={126}
+              height={36}
+              priority
+            />
           </a>
 
           {/* Desktop links */}
@@ -61,8 +66,21 @@ export default function Navbar() {
           </ul>
 
           {/* Desktop CTA */}
-          <div className="hidden md:block">
-            <Button variant="primary" size="sm">
+          <div className="hidden md:flex items-center gap-3">
+            <a
+              href={appUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => pushEvent("cta_click", { button_text: "Acessar Plataforma", button_location: "navbar_desktop" })}
+              className="inline-flex items-center justify-center font-body font-medium rounded-lg text-sm px-4 py-2 bg-transparent border border-white/20 text-white hover:bg-white/5 transition-all duration-200"
+            >
+              Acessar Plataforma
+            </a>
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={() => pushEvent("cta_click", { button_text: "Acesso antecipado", button_location: "navbar_desktop" })}
+            >
               Acesso antecipado
             </Button>
           </div>
@@ -98,9 +116,23 @@ export default function Navbar() {
                 </li>
               ))}
             </ul>
-            <Button variant="primary" size="md" className="w-full">
+            <Button
+              variant="primary"
+              size="md"
+              className="w-full"
+              onClick={() => pushEvent("cta_click", { button_text: "Acesso antecipado", button_location: "navbar_mobile" })}
+            >
               Acesso antecipado
             </Button>
+            <a
+              href={appUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => pushEvent("cta_click", { button_text: "Acessar Plataforma", button_location: "navbar_mobile" })}
+              className="inline-flex items-center justify-center font-body font-medium rounded-lg text-base px-6 py-3 w-full bg-transparent border border-white/20 text-white hover:bg-white/5 transition-all duration-200"
+            >
+              Acessar Plataforma
+            </a>
           </div>
         </div>
       )}
