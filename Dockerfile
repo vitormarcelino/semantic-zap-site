@@ -13,11 +13,16 @@ RUN npm ci
 FROM base AS builder
 WORKDIR /app
 
+ARG NEXT_PUBLIC_APP_URL
+ARG NEXT_PUBLIC_GTM_ID
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Disable Next.js telemetry during build
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
+ENV NEXT_PUBLIC_GTM_ID=$NEXT_PUBLIC_GTM_ID
 
 RUN npm run build
 
